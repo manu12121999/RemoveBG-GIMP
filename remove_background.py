@@ -1,22 +1,43 @@
 #!/usr/bin/env python
 
 from gimpfu import *
-from sys import platform
 import requests
 
- 
+    
 
 def remove_background(image, layer, key):
     pdb.gimp_image_undo_group_start(image)
     
 
     #input
-    f = 'C:\\tmp\\temp.png'
-    f2 =  'C:\\tmp\\temp2.png'
-        
-    pdb.file_png_save_defaults(image, layer, f, f)
+    height = pdb.gimp_drawable_height(layer)
+    width = pdb.gimp_drawable_width(layer)
+    
+    new_height = float(height)
+    new_width = float(width)
+    
+    if new_height > 1080.0:   #scale down 
+        factor = new_height/1080.0
+        new_height = 1080
+        new_width = int(new_width / factor)
+
+    if new_width > 1920.0:
+        factor = new_width/1920.0
+        new_width = 1920
+        new_height = int(new_height/factor)
+    
     
 
+    layer_copy = pdb.gimp_layer_copy(layer, 1)
+    pdb.gimp_image_insert_layer(image,layer_copy,None,0)
+    pdb.gimp_layer_scale(layer_copy, new_width, new_height, 0)  #make a copy and scale it down
+       
+    f = 'C:\\tmp\\temp.png'
+    f2 =  'C:\\tmp\\temp2.png'
+    
+    pdb.file_png_save_defaults(image, layer_copy, f, f)
+    pdb.gimp_image_remove_layer(image, layer_copy)
+    
     
     #remove.bg
     response = requests.post(
@@ -35,10 +56,9 @@ def remove_background(image, layer, key):
 
     #output
     outlayer = pdb.gimp_file_load_layer(image, f2)
-    pdb.gimp_image_insert_layer(image, outlayer, None, 0) # because you cant scale without adding
+    pdb.gimp_image_insert_layer(image, outlayer, None, 0) # because you cant scale without adding the layer
     
-    height = pdb.gimp_drawable_height(layer)
-    width = pdb.gimp_drawable_width(layer)
+    
   
     
     pdb.gimp_layer_scale(outlayer, width, height, 0)
@@ -68,6 +88,3 @@ register(
     remove_background, menu="<Image>/Filters")
 
 main()
-
-
-
