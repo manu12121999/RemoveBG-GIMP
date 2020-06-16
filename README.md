@@ -7,7 +7,6 @@ Just put the file in your plugins- directory:
 C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 ### Linux
 ~/.gimp-2.8/plug-ins/
-make it executable with
 
  `chmod +x ~/.gimp-2.8/plug-ins/remove_background.py`
 
