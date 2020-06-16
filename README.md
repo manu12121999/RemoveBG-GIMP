@@ -2,7 +2,7 @@
 A small plugin to easily remove the Background of a Image with remove.bg
 
 ## Installation:
-requires `requests`, which can be obtained with `pip install requests`
+requires `requests`, which can be obtained with `pip install requests` (which requires python)
 
 Just put the file in your plugins- directory:
 ### Windows: 
@@ -20,7 +20,6 @@ C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
 ## Problems:
-- does't work if the image is to big!!!
 - does only work on Windows properly ( on Linux: change `C:\\tmp\\tmp.png` to an other place ) 
 - hasn't been tested much
 
