@@ -11,13 +11,8 @@ def remove_background(image, layer, key):
     
 
     #input
-    
-    if platform == "linux" or platform == "linux2":
-        f = '\\tmp\\temp.png'
-        f2 ='\\tmp\\temp2.png'
-    else 
-        f = 'C:\\tmp\\temp.png'
-        f2 =  'C:\\tmp\\temp2.png'
+    f = 'C:\\tmp\\temp.png'
+    f2 =  'C:\\tmp\\temp2.png'
         
     pdb.file_png_save_defaults(image, layer, f, f)
     
