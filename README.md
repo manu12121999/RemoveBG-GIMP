@@ -20,7 +20,8 @@ C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
 ## Problems:
-- works only on Windows properly ( on Linux: change `C:\\tmp\\tmp.png` to an other place ) 
+- does't work if the image is to big!!!
+- does only work on Windows properly ( on Linux: change `C:\\tmp\\tmp.png` to an other place ) 
 - hasn't been tested much
 
 ## Notes:
