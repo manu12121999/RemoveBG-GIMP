@@ -1,17 +1,24 @@
 #!/usr/bin/env python
 
 from gimpfu import *
+from sys import platform
 import requests
 
-    
+ 
 
 def remove_background(image, layer, key):
     pdb.gimp_image_undo_group_start(image)
     
 
     #input
-    f = 'C:\\tmp\\temp.png'
-    f2 =  'C:\\tmp\\temp2.png'
+    
+    if platform == "linux" or platform == "linux2":
+        f = '\\tmp\\temp.png'
+        f2 ='\\tmp\\temp2.png'
+    else 
+        f = 'C:\\tmp\\temp.png'
+        f2 =  'C:\\tmp\\temp2.png'
+        
     pdb.file_png_save_defaults(image, layer, f, f)
     
 
