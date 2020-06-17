@@ -8,7 +8,11 @@ Just put the file in your plugins- directory:
 ### Windows: 
 C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 ### Linux
-~/.gimp-2.8/plug-ins/
+Might not work ( ImportError: no modue named requests) even when requests is installed. I will look into it later. If it works, the directory might be at
+
+~/.gimp-2.10/plug-ins/
+
+or /usr/lib/gimp/2.0/plug-ins
 
  `chmod +x ~/.gimp-2.8/plug-ins/remove_background.py`
 
@@ -21,6 +25,7 @@ C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 
 ## Problems:
 - does only work on Windows properly ( on Linux: change `C:\\tmp\\tmp.png` to an other place ) 
+- it might currently only work on Linux(Ubuntu) with the GIMP from Ubuntu Software.
 - hasn't been tested much
 
 ## Notes:
