@@ -26,9 +26,6 @@ or /usr/lib/gimp/2.0/plug-ins
 ## Problems:
 - does only work on Windows properly 
 - it might currently only work on Linux(Ubuntu) with the GIMP you get from `sudo apt install gimp` , but not with the one you get from `sudo snap install gimp`
-- with Linux, change f and f2 to 
-    `f = "/tmp/temp.png"`
-    `f2 =  "/tmp/temp2.png"`
 - hasn't been tested much
 
 ## Notes:
