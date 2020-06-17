@@ -25,7 +25,7 @@ or /usr/lib/gimp/2.0/plug-ins
 
 ## Problems:
 - does only work on Windows properly ( on Linux: change `C:\\tmp\\tmp.png` to an other place ) 
-- it might currently only work on Linux(Ubuntu) with the GIMP from Ubuntu Software.
+- it might currently only work on Linux(Ubuntu) with the GIMP you get from `sudo apt install gimp` , but not with the one you get from `sudo snap install gimp`
 - hasn't been tested much
 
 ## Notes:
