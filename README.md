@@ -14,7 +14,7 @@ Might not work ( ImportError: no modue named requests) even when requests is ins
 
 or /usr/lib/gimp/2.0/plug-ins
 
- `chmod +x ~/.gimp-2.8/plug-ins/remove_background.py`
+ `chmod +x ~/.gimp-2.10/plug-ins/remove_background.py`
 
 ## Usage:
 1. Filters -> removeBackground
