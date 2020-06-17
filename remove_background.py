@@ -2,6 +2,9 @@
 
 from gimpfu import *
 import requests
+from sys import platform
+import tempfile
+import os
 
     
 
@@ -31,11 +34,17 @@ def remove_background(image, layer, key):
     layer_copy = pdb.gimp_layer_copy(layer, 1)
     pdb.gimp_image_insert_layer(image,layer_copy,None,0)
     pdb.gimp_layer_scale(layer_copy, new_width, new_height, 0)  #make a copy and scale it down
-       
-    f = 'C:\\tmp\\temp.png'
-    f2 =  'C:\\tmp\\temp2.png'
+    
+    temp = tempfile.gettempdir()
+    if platform == "linux":
+        f = "/tmp/temp.png"
+        f2 =  "/tmp/temp2.png"
+    else:
+        f = temp + "\\temp.png"
+        f2 = temp + "\\temp2.png"
     
     pdb.file_png_save_defaults(image, layer_copy, f, f)
+    
     pdb.gimp_image_remove_layer(image, layer_copy)
     
     
@@ -47,28 +56,25 @@ def remove_background(image, layer, key):
         headers={'X-Api-Key': key},
     )
     if response.status_code == requests.codes.ok:
-        with open(f2, 'wb') as out:
+    	with open(f2, 'wb') as out:
             out.write(response.content)
+    	#output
+    	outlayer = pdb.gimp_file_load_layer(image, f2)
+    	pdb.gimp_image_insert_layer(image, outlayer, None, 0) # because you cant scale without adding the layer
+
+
+    	pdb.gimp_layer_scale(outlayer, width, height, 0)
+    	#pdb.gimp_layer_resize(outlayer, width, height, 0, 0)
+
+    	mask = pdb.gimp_layer_create_mask(outlayer, 2)
+    	pdb.gimp_layer_add_mask(layer, mask)
+    	pdb.gimp_image_remove_layer(image, outlayer)
+
+    	pdb.gimp_image_undo_group_end(image)
+
     else:
+    	pdb.gimp_image_undo_group_end(image)
         print("Error:", response.status_code, response.text)
-    
-
-
-    #output
-    outlayer = pdb.gimp_file_load_layer(image, f2)
-    pdb.gimp_image_insert_layer(image, outlayer, None, 0) # because you cant scale without adding the layer
-    
-    
-  
-    
-    pdb.gimp_layer_scale(outlayer, width, height, 0)
-    #pdb.gimp_layer_resize(outlayer, width, height, 0, 0)
-    
-    mask = pdb.gimp_layer_create_mask(outlayer, 2)
-    pdb.gimp_layer_add_mask(layer, mask)
-    pdb.gimp_image_remove_layer(image, outlayer)
-    
-    pdb.gimp_image_undo_group_end(image)
     
 
 register(
