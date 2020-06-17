@@ -24,8 +24,11 @@ or /usr/lib/gimp/2.0/plug-ins
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
 ## Problems:
-- does only work on Windows properly ( on Linux: change `C:\\tmp\\tmp.png` to an other place ) 
+- does only work on Windows properly 
 - it might currently only work on Linux(Ubuntu) with the GIMP you get from `sudo apt install gimp` , but not with the one you get from `sudo snap install gimp`
+- with Linux, change f and f2 to 
+    `f = "/tmp/temp.png"`
+    `f2 =  "tmp/temp2.png"`
 - hasn't been tested much
 
 ## Notes:
