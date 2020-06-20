@@ -8,11 +8,11 @@ Just put the file in your plugins- directory:
 ### Windows: 
 C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 ### Linux
-Might not work ( ImportError: no modue named requests) even when requests is installed. I will look into it later. If it works, the directory might be at
+Might not work even when requests is installed, e.g when Gimp is installed with snap. Otherwise the directory might be at
 
 ~/.gimp-2.10/plug-ins/
 
-or /usr/lib/gimp/2.0/plug-ins
+or /usr/lib/gimp/2.0/plug-ins   .Make sure to make it executable with
 
  `chmod +x ~/.gimp-2.10/plug-ins/remove_background.py`
 
@@ -24,9 +24,7 @@ or /usr/lib/gimp/2.0/plug-ins
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
 ## Problems:
-- does only work on Windows properly 
-- it might currently only work on Linux(Ubuntu) with the GIMP you get from `sudo apt install gimp` , but not with the one you get from `sudo snap install gimp`
-- hasn't been tested much
+- it might currently not work on Linux(Ubuntu) with the GIMP you get from `sudo snap install gimp` , but it works with the one you get from `sudo apt install gimp`
 
 ## Notes:
 for convenience, hard-code your key in the request-part of the code
