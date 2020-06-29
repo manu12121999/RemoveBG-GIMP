@@ -81,13 +81,13 @@ register(
     "python-fu-remove_background",
     "Easy Way to remove the BG of a Picture",
     "Description.",
-    "Manuel V.", "M", "2034",
+    "Manuel V.", "M", "2020",
     "remove_background",
     "*", 
     [
         (PF_IMAGE, "image","takes current image", None),
         (PF_DRAWABLE, "drawable","input layer", None),
-        (PF_STRING, "key", "Remove_bg KEY", "insert_YOUR_KEY_HERE")
+        (PF_STRING, "key", "Remove_bg KEY", "INSERT_YOUR_KEY_HERE")
 
     ],
     [],
