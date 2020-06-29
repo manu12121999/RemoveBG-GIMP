@@ -1,5 +1,5 @@
 # RemoveBG-GIMP
-A small plugin to easily remove the Background of a Image with remove.bg
+A small plugin to easily remove the Background of a Image using https://www.remove.bg/
 
 ## Installation:
 requires `requests`, which can be obtained with `pip install requests` (which requires python)
