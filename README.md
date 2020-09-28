@@ -22,7 +22,7 @@ or /usr/lib/gimp/2.0/plug-ins
 
 or ~/snap/gimp/281/.config/GIMP/2.10/plug-ins
 
-#### 3.Put the plugin in this directory and run in the same directory:
+#### 3. Put the plugin in this directory and run in the same directory:
 
 ```
 chmod +x remove_background.py
@@ -46,7 +46,6 @@ deactivate
 ## Problems:
 - if removebackground does not show up in the GIMP Menu, it's because requests is not found. 
 If requests is installed correctly, tell me about it in the Issue Section.
-- for some linux systmems the master branch works fine. If it does not work, check out the linux branch. 
 
 ## Notes:
 for convenience, hard-code your key in the request-part of the code
