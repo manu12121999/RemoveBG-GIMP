@@ -1,12 +1,16 @@
 #!/usr/bin/env python
+import os 
+baseLoc = os.path.dirname(os.path.realpath(__file__))+'/'
 
 from gimpfu import *
-import requests
-from sys import platform
-import tempfile
-import os
+import sys
 
-    
+sys.path.extend([baseLoc+'gimpenv/lib/python2.7', baseLoc+'gimpenv/lib/python2.7/site-packages', baseLoc+'gimpenv/lib/python2.7/site-packages/setuptools'])
+
+from sys import platform
+import requests
+import tempfile
+
 
 def remove_background(image, layer, key):
     pdb.gimp_image_undo_group_start(image)
@@ -36,7 +40,7 @@ def remove_background(image, layer, key):
     pdb.gimp_layer_scale(layer_copy, new_width, new_height, 0)  #make a copy and scale it down
     
     temp = tempfile.gettempdir()
-    if platform == "linux":
+    if platform == "linux" or platform == "linux2":
         f = "/tmp/temp.png"
         f2 =  "/tmp/temp2.png"
     else:
@@ -53,7 +57,7 @@ def remove_background(image, layer, key):
         'https://api.remove.bg/v1.0/removebg',
         files={'image_file': open(f,'rb')},
         data={'size': 'auto'},
-        headers={'X-Api-Key': key},
+        headers={'X-Api-Key': key},     #HARD CODE YOUR KEY HERE e.g: {'X-Api-Key' ="asdfjas"},
     )
     if response.status_code == requests.codes.ok:
     	with open(f2, 'wb') as out:
