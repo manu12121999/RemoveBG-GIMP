@@ -2,21 +2,17 @@
 A small plugin to easily remove the Background of a Image using https://www.remove.bg/
 
 ## Installation:
+### Windows: 
 requires `requests`, which can be obtained with `pip install requests` (which requires python)
 
 Just put the file in your plugins- directory:
-### Windows: 
+
 C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
-### Linux
-The directory might be at
 
-~/.gimp-2.10/plug-ins/
+### Linux: 
+#### see branch:linux
 
-or /usr/lib/gimp/2.0/plug-ins   .Make sure to make it executable with
 
- `chmod +x ~/.gimp-2.10/plug-ins/remove_background.py`
- 
- 
 
 ## Usage:
 1. Filters -> removeBackground
@@ -28,7 +24,7 @@ or /usr/lib/gimp/2.0/plug-ins   .Make sure to make it executable with
 ## Problems:
 - if removebackground does not show up in the GIMP Menu, it's because requests is not found. 
 If requests is installed correctly, tell me about it in the Issue Section.
-- it might currently not work on Linux(Ubuntu) with the GIMP you get from `sudo snap install gimp` , but it works with the one you get from `sudo apt install gimp`
+- for some linux systmems the master branch works fine. If it does not work, check out the linux branch. 
 
 ## Notes:
 for convenience, hard-code your key in the request-part of the code
