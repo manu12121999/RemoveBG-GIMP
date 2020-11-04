@@ -3,16 +3,16 @@ A small plugin to easily remove the Background of a Image using https://www.remo
 
 ## Installation:
 ### Windows: 
-1. Install python 2.7 and pip
+1. Install python
 
 2. Install  `requests` with `pip install requests`
 
-3. Put the file in your plugins- directory:
+3. Put the remove_background.py file in your plugins- directory:
 
 C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 
 ### Linux: 
-1. Install python 2.7 and pip
+1. Install python and requests ( `pip install requests`)
 
 2. Search your plugins- directory. The directory might be at
 
@@ -22,7 +22,9 @@ C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 
  or ~/snap/gimp/281/.config/GIMP/2.10/plug-ins
 
-#### 3. Put the plugin in this directory and run in the same directory:
+#### 3. Put the remove_background.py in this directory 
+
+#### 4. In the same directory run (if the plugin does not show up in Gimp):
 
 ```
 chmod +x remove_background.py
@@ -33,7 +35,7 @@ python -m install requests
 deactivate
 ```
  
- or execute the setup file
+ or execute the setup file (the setup.sh file needs to be in the same directory as remove_background.py)
 
 
 ## Usage:
@@ -51,6 +53,6 @@ If requests is installed correctly, tell me about it in the Issue Section.
 for convenience, hard-code your key in the request-part of the code
 
 ## Licence:
-It is not a official remove.bg plugin, so keeps their Terms of Service in mind (https://www.remove.bg/tos)
+It is not a official remove.bg plugin, so keep their Terms of Service in mind (https://www.remove.bg/tos)
 
 Besides that, you can do whatever you want with my code!
