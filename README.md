@@ -22,21 +22,19 @@ C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 
  or ~/snap/gimp/281/.config/GIMP/2.10/plug-ins
 
-#### 3. Put the remove_background.py in this directory 
+3. Put the remove_background.py in this directory and make it executable with `chmod +x remove_background.py` 
 
-#### 4. In the same directory run (if the plugin does not show up in Gimp):
+#### if the plugin does not show up in Gimp, then run (in your plugins directory):
 
 ```
 chmod +x remove_background.py
 python -m pip install --user virtualenv
 python -m virtualenv gimpenv
 source gimpenv/bin/activate
-python -m install requests
+python -m pip install requests
 deactivate
 ```
  
- or execute the setup file (the setup.sh file needs to be in the same directory as remove_background.py)
-
 
 ## Usage:
 1. Filters -> removeBackground
