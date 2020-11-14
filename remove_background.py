@@ -1,29 +1,45 @@
-#!/usr/bin/env python
-import os 
+#!/usr/bin/env python3
+
+# This Plugin is for GIMP Version >= 2.99
+import gi
+gi.require_version('Gimp', '3.0')
+from gi.repository import Gimp
+gi.require_version('GimpUi', '3.0')
+from gi.repository import GimpUi
+gi.require_version('Gegl', '0.4')
+from gi.repository import Gegl
+from gi.repository import GObject
+from gi.repository import GLib
+from gi.repository import Gio
+
+import gettext
+_ = gettext.gettext
+
+import os, sys
+
+
 baseLoc = os.path.dirname(os.path.realpath(__file__))+'/'
-
-from gimpfu import *
-import tempfile
-import sys
-from sys import platform
-
 sys.path.extend([baseLoc+'gimpenv/lib/python2.7', baseLoc+'gimpenv/lib/python2.7/site-packages', baseLoc+'gimpenv/lib/python2.7/site-packages/setuptools'])
 sys.path.extend([baseLoc+'gimpenv/lib/python3.6', baseLoc+'gimpenv/lib/python3.6/site-packages', baseLoc+'gimpenv/lib/python3.6/site-packages/setuptools'])
 sys.path.extend([baseLoc+'gimpenv/lib/python3.7', baseLoc+'gimpenv/lib/python3.7/site-packages', baseLoc+'gimpenv/lib/python3.7/site-packages/setuptools'])
 sys.path.extend([baseLoc+'gimpenv/lib/python3.8', baseLoc+'gimpenv/lib/python3.8/site-packages', baseLoc+'gimpenv/lib/python3.8/site-packages/setuptools'])
 sys.path.extend([baseLoc+'gimpenv/lib/python3.9', baseLoc+'gimpenv/lib/python3.9/site-packages', baseLoc+'gimpenv/lib/python3.9/site-packages/setuptools'])
 
+sys.path.extend([baseLoc+'gimpenv/Lib', baseLoc+'gimpenv/Lib/site-packages', baseLoc+'gimpenv/Lib/site-packages/setuptools'])
 import requests
 
+def N_(message): return message
 
 
-def remove_background(image, layer, key):
-    pdb.gimp_image_undo_group_start(image)
+
+def remove_bg(procedure, run_mode, image, drawable, args, data):
     
+    key = args.index(0)
+    image.undo_group_start()
 
     #input
-    height = pdb.gimp_drawable_height(layer)
-    width = pdb.gimp_drawable_width(layer)
+    height = drawable.height()
+    width =  drawable.width ()
     
     new_height = float(height)
     new_width = float(width)
@@ -39,67 +55,90 @@ def remove_background(image, layer, key):
         new_height = int(new_height/factor)
     
     
+    layer_copy = drawable.copy()
+    image.insert_layer(layer_copy,None,0)
+    layer_copy.scale(new_width, new_height, 0)  #make a copy and scale it down
+    
+    file1 = Gimp.temp_file('png')
+    file2 = Gimp.temp_file('png')
+ 
+    Gimp.file_save(Gimp.RunMode.NONINTERACTIVE,image,[layer_copy],file1)
 
-    layer_copy = pdb.gimp_layer_copy(layer, 1)
-    pdb.gimp_image_insert_layer(image,layer_copy,None,0)
-    pdb.gimp_layer_scale(layer_copy, new_width, new_height, 0)  #make a copy and scale it down
-    
-    temp = tempfile.gettempdir()
-    if platform == "linux" or platform == "linux2":
-        f = "/tmp/temp.png"
-        f2 =  "/tmp/temp2.png"
-    else:
-        f = temp + "\\temp.png"
-        f2 = temp + "\\temp2.png"
-    
-    pdb.file_png_save_defaults(image, layer_copy, f, f)
-    
-    pdb.gimp_image_remove_layer(image, layer_copy)
+    image.remove_layer(layer_copy)
     
     
     #remove.bg
     response = requests.post(
         'https://api.remove.bg/v1.0/removebg',
-        files={'image_file': open(f,'rb')},
-        data={'size': 'auto'},
-        headers={'X-Api-Key': key},     #HARD CODE YOUR KEY HERE e.g: {'X-Api-Key' ="asdfjas"},
-    )
+         files={'image_file': open(file1.peek_path(),'rb')},
+         data={'size': 'auto'},
+         headers={'X-Api-Key': key},     #HARD CODE YOUR KEY HERE e.g: {'X-Api-Key' ="asdfjas"},
+     )
     if response.status_code == requests.codes.ok:
-    	with open(f2, 'wb') as out:
+        with open(file2.peek_path(), 'wb') as out:
             out.write(response.content)
-    	#output
-    	outlayer = pdb.gimp_file_load_layer(image, f2)
-    	pdb.gimp_image_insert_layer(image, outlayer, None, 0) # because you cant scale without adding the layer
+        #output
+        result_layer = Gimp.file_load_layer(Gimp.RunMode.NONINTERACTIVE,image,file2)
+        
+
+        image.insert_layer(result_layer, None, 0) # because you cant scale without adding the layer
 
 
-    	pdb.gimp_layer_scale(outlayer, width, height, 0)
-    	#pdb.gimp_layer_resize(outlayer, width, height, 0, 0)
+        result_layer.scale(width, height, 0)
+        #Gimp.gimp_layer_resize(result_layer, width, height, 0, 0)
 
-    	mask = pdb.gimp_layer_create_mask(outlayer, 2)
-    	pdb.gimp_layer_add_mask(layer, mask)
-    	pdb.gimp_image_remove_layer(image, outlayer)
-
-    	pdb.gimp_image_undo_group_end(image)
+        mask = result_layer.create_mask(2)
+        drawable.add_mask(mask)
+        image.remove_layer(result_layer)
+        image.undo_group_end()
 
     else:
-    	pdb.gimp_image_undo_group_end(image)
+        image.undo_group_end()
         print("Error:", response.status_code, response.text)
-    
+        
+    return procedure.new_return_values(Gimp.PDBStatusType.SUCCESS, GLib.Error())
 
-register(
-    "python-fu-remove_background",
-    "Easy Way to remove the BG of a Picture",
-    "Description.",
-    "Manuel V.", "M", "2020",
-    "remove_background",
-    "*", 
-    [
-        (PF_IMAGE, "image","takes current image", None),
-        (PF_DRAWABLE, "drawable","input layer", None),
-        (PF_STRING, "key", "Remove_bg KEY", "INSERT_YOUR_KEY_HERE")
 
-    ],
-    [],
-    remove_background, menu="<Image>/Filters")
 
-main()
+class RemoveBG(Gimp.PlugIn):
+    ## Parameters ##
+    __gproperties__ = {
+        "key": (str,
+                _("Key"),
+                _("Used Key"),
+                _("Insert your key here"),
+                GObject.ParamFlags.READWRITE),
+    }
+
+    ## GimpPlugIn virtual methods ##
+    def do_query_procedures(self):
+        self.set_translation_domain("gimp30-python",
+                                    Gio.file_new_for_path(Gimp.locale_directory()))
+
+        return [ 'python-fu-remove-background' ]
+
+
+    def do_create_procedure(self, name):
+        procedure = None
+        if name == 'python-fu-remove-background':
+            procedure = Gimp.ImageProcedure.new(self, name,
+                                                Gimp.PDBProcType.PLUGIN,
+                                                remove_bg, None)
+            procedure.set_image_types("*")
+            procedure.set_documentation(
+                N_("Easy way to remove any background from an image"),
+                "test",  
+                name)
+            procedure.set_menu_label(N_("Remove Backgound"))
+            procedure.set_attribution("Manuel Vogel",
+                                      "Manuel Vogel",
+                                      "2020")
+            procedure.add_menu_path("<Image>/Filters/RemoveBackgound")
+
+            procedure.add_argument_from_property(self, "key")
+
+        return procedure
+        
+ 
+
+Gimp.main(RemoveBG.__gtype__, sys.argv)
