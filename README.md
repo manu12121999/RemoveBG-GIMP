@@ -8,9 +8,9 @@ A small plugin to easily remove the Background of a Image using https://www.remo
 ### Windows: 
 1. Install python
 
-2. Put the remove_background folder(unzipped) in a your plugins- directory (at C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins)
+2. Put the remove_background folder(unzipped) in a your plugins- directory (at *C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins*)
 
-3. Install requests in for the pyhton installation of Gimp by opening the command prompt in admin mode and typ something like
+3. Install requests in for the pyhton installation of Gimp by opening the command prompt in admin mode and type: (replace remove_bg by the name of the folder)
 ```
  cd C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins\remove_bg   
  python -m venv gimpenv
@@ -24,9 +24,9 @@ A small plugin to easily remove the Background of a Image using https://www.remo
 
 2. Search your plugins- directory. The directory might be at:
 
- *~/.gimp-2.10/plug-ins/*        
+ *~/.gimp-2.99/plug-ins/*        
  */usr/lib/gimp/2.0/plug-ins*      
- *~/snap/gimp/281/.config/GIMP/2.10/plug-ins*
+ *~/snap/gimp/281/.config/GIMP/2.99/plug-ins*
 
 3. Put the remove_background folder in this directory
 
