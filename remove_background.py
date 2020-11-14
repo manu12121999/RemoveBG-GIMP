@@ -33,8 +33,8 @@ def N_(message): return message
 
 
 def remove_bg(procedure, run_mode, image, drawable, args, data):
-    
-    key = args.index(0)
+    with open(os.path.dirname(os.path.realpath(__file__))+'/key.txt','r') as key_file:
+       key = key_file.read()
     image.undo_group_start()
 
     #input
@@ -72,7 +72,7 @@ def remove_bg(procedure, run_mode, image, drawable, args, data):
         'https://api.remove.bg/v1.0/removebg',
          files={'image_file': open(file1.peek_path(),'rb')},
          data={'size': 'auto'},
-         headers={'X-Api-Key': key},     #HARD CODE YOUR KEY HERE e.g: {'X-Api-Key' ="asdfjas"},
+         headers={'X-Api-Key': key},
      )
     if response.status_code == requests.codes.ok:
         with open(file2.peek_path(), 'wb') as out:
@@ -101,14 +101,6 @@ def remove_bg(procedure, run_mode, image, drawable, args, data):
 
 
 class RemoveBG(Gimp.PlugIn):
-    ## Parameters ##
-    __gproperties__ = {
-        "key": (str,
-                _("Key"),
-                _("Used Key"),
-                _("Insert your key here"),
-                GObject.ParamFlags.READWRITE),
-    }
 
     ## GimpPlugIn virtual methods ##
     def do_query_procedures(self):
@@ -134,8 +126,6 @@ class RemoveBG(Gimp.PlugIn):
                                       "Manuel Vogel",
                                       "2020")
             procedure.add_menu_path("<Image>/Filters/RemoveBackgound")
-
-            procedure.add_argument_from_property(self, "key")
 
         return procedure
         
