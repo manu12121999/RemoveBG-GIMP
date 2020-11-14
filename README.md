@@ -1,3 +1,6 @@
+## THIS BRANCH WORKS ONLY FOR GIMP >= 2.99. 
+Currently in development
+
 # RemoveBG-GIMP
 A small plugin to easily remove the Background of a Image using https://www.remove.bg/
 
@@ -5,31 +8,33 @@ A small plugin to easily remove the Background of a Image using https://www.remo
 ### Windows: 
 1. Install python
 
-2. Install  `requests` with `pip install requests`
+2. Put the remove_background folder(unzipped) in a your plugins- directory (at C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins)
 
-3. Put the remove_background.py file in your plugins- directory:
-
-C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
+3. Install requests in for the pyhton installation of Gimp by opening the command prompt in admin mode and typ something like
+```
+ cd C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins\remove_bg   
+ python -m venv gimpenv
+ gimpenv\Scripts\activate.bat
+ python -m pip install requests
+ deactivate
+```
 
 ### Linux: 
-1. Install python and requests ( `pip install requests`)
+1. Install python
 
-2. Search your plugins- directory. The directory might be at
+2. Search your plugins- directory. The directory might be at:
 
- ~/.gimp-2.10/plug-ins/
+ *~/.gimp-2.10/plug-ins/*        
+ */usr/lib/gimp/2.0/plug-ins*      
+ *~/snap/gimp/281/.config/GIMP/2.10/plug-ins*
 
- or /usr/lib/gimp/2.0/plug-ins  
+3. Put the remove_background folder in this directory
 
- or ~/snap/gimp/281/.config/GIMP/2.10/plug-ins
-
-3. Put the remove_background.py in this directory and make it executable with `chmod +x remove_background.py` 
-
-#### if the plugin does not show up in Gimp, then run (in your plugins directory):
+4. make it executable and install requests with: 
 
 ```
 chmod +x remove_background.py
-python -m pip install --user virtualenv
-python -m virtualenv gimpenv
+python -m venv gimpenv
 source gimpenv/bin/activate
 python -m pip install requests
 deactivate
@@ -44,11 +49,8 @@ deactivate
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
 ## Problems:
-- if removebackground does not show up in the GIMP Menu, it's because requests is not found. 
-If requests is installed correctly, tell me about it in the Issue Section.
+- You might need to hard Code your key in the Code, if there is not dialog.
 
-## Notes:
-for convenience, hard-code your key in the request-part of the code
 
 ## Licence:
 It is not a official remove.bg plugin, so keep their Terms of Service in mind (https://www.remove.bg/tos)
