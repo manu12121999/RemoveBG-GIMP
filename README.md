@@ -1,6 +1,7 @@
 # RemoveBG-GIMP
 A small plugin to easily remove the Background of a Image using https://www.remove.bg/
 
+This branch works only for GIMP up to 2.10. For new versions of Gimp (2.99 or 3.0), check out the branch "gimp3.0".
 ## Installation:
 ### Windows: 
 1. Install python
