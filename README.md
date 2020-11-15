@@ -8,9 +8,9 @@ A small plugin to easily remove the Background of a Image using https://www.remo
 ### Windows: 
 1. Install python
 
-2. Put the remove_background folder(unzipped) in a your plugins- directory (at *C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins*)
+2. Put the remove_background folder(unzipped) in a your plugin-directory at *C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins*
 
-3. Install requests in for the pyhton installation of Gimp by opening the command prompt in admin mode and type: (replace remove_bg by the name of the folder)
+3. Install requests for the python installation of Gimp by opening the command prompt in admin mode and type: (replace remove_bg by the name of the folder)
 ```
  cd C:\Program Files\GIMP 2.99\lib\gimp\2.99\plug-ins\remove_bg   
  python -m venv gimpenv
@@ -42,15 +42,13 @@ deactivate
  
 
 ## Usage:
-1. Filters -> removeBackground
-2. insert your RemoveBG API Key, which you can get from https://www.remove.bg/api
+1. Before using it for the first time, replace the dummy key in key.txt with your API key, which you can get from https://www.remove.bg/api
+1. Filters -> RemoveBackground -> removeBackground
 ![Screenshot (111)](https://user-images.githubusercontent.com/66686353/84802853-773a8080-b001-11ea-9c1a-5da90977a010.png)
-![Screenshot (112)](https://user-images.githubusercontent.com/66686353/84803152-e1532580-b001-11ea-9bf5-ff2061c3f061.png)
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
 ## Problems:
-- You might need to hard Code your key in the Code, if there is not dialog.
-
+- I experienced problems in Gimp 2.99 that new plugins do not get queried. 
 
 ## Licence:
 It is not a official remove.bg plugin, so keep their Terms of Service in mind (https://www.remove.bg/tos)
