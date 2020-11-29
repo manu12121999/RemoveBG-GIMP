@@ -12,6 +12,16 @@ This branch works only for GIMP up to 2.10. For new versions of Gimp (2.99 or 3.
 
 C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 
+#### if the plugin does not show up, open a command prompt as admin and type:
+```
+cd C:\Program Files\GIMP 2\lib\gimp\2.10\plug-ins\
+python -m pip install --user virtualenv
+python -m virtualenv gimpenv
+source gimpenv/bin/activate
+python -m pip install requests
+deactivate
+ ```
+
 ### Linux: 
 1. Install python and requests ( `pip install requests`)
 
