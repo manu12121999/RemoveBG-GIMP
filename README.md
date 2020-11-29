@@ -47,8 +47,8 @@ deactivate
 ![Screenshot (111)](https://user-images.githubusercontent.com/66686353/84802853-773a8080-b001-11ea-9c1a-5da90977a010.png)
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
-## Problems:
-- I experienced problems in Gimp 2.99 that new plugins do not get queried. 
+## Notes:
+- In Gimp 2.99 new plugins do not get queried if they are not placed inside a subfolder. 
 
 ## Licence:
 It is not a official remove.bg plugin, so keep their Terms of Service in mind (https://www.remove.bg/tos)
