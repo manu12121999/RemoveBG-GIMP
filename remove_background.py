@@ -34,7 +34,10 @@ def N_(message): return message
 
 def remove_bg(procedure, run_mode, image, drawable, args, data):
     with open(os.path.dirname(os.path.realpath(__file__))+'/key.txt','r') as key_file:
-       key = key_file.read()
+       key = key_file.readline(24)
+       if(key == 'tijaTESTKEYfsafjdastwxsh'):
+           print("Error: Put your key in the key.txt file. You can get a key from remove.bg")
+           return procedure.new_return_values(Gimp.PDBStatusType.SUCCESS, GLib.Error())
     image.undo_group_start()
 
     #input
@@ -95,6 +98,7 @@ def remove_bg(procedure, run_mode, image, drawable, args, data):
     else:
         image.undo_group_end()
         print("Error:", response.status_code, response.text)
+        Gimp.displays_flush()
         
     return procedure.new_return_values(Gimp.PDBStatusType.SUCCESS, GLib.Error())
 
@@ -124,7 +128,7 @@ class RemoveBG(Gimp.PlugIn):
             procedure.set_menu_label(N_("Remove Backgound"))
             procedure.set_attribution("Manuel Vogel",
                                       "Manuel Vogel",
-                                      "2020")
+                                      "2021")
             procedure.add_menu_path("<Image>/Filters/RemoveBackgound")
 
         return procedure
