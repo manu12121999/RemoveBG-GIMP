@@ -2,7 +2,7 @@
 A small plugin to easily remove the background of an image using https://www.remove.bg/
 
 
-## THIS BRANCH WORKS ONLY FOR GIMP >= 2.99. 
+## THIS BRANCH WORKS ONLY FOR GIMP >= 2.99. Still in DEVELOPMENT, so expect CRASHES
 
 ## Installation:
 ### Windows: 
@@ -38,8 +38,8 @@ deactivate
  
 
 ## Usage:
-1. Before using it for the first time, replace the dummy key in key.txt with your API key, which you can get from https://www.remove.bg/api
-2. Filters → RemoveBackground → removeBackground
+1. Filters → RemoveBackground → removeBackground
+2. Enter your key in the key dialog. You get a API key for free at https://www.remove.bg/api
 ![Screenshot (111)](https://user-images.githubusercontent.com/66686353/84802853-773a8080-b001-11ea-9c1a-5da90977a010.png)
 ![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
 
