@@ -4,6 +4,15 @@ A small plugin to easily remove the background of an image using https://www.rem
 
 ## THIS BRANCH WORKS ONLY FOR GIMP >= 2.99. Still in DEVELOPMENT, so expect CRASHES
 
+## Usage
+1. Install the plugin as shown below
+2. Filters → RemoveBackground → Remove Background
+3. Enter your key in the key dialog. You get a API key for free at https://www.remove.bg/api
+![1](https://user-images.githubusercontent.com/66686353/117555656-59369e00-b061-11eb-870e-1223874372ed.png)
+![2](https://user-images.githubusercontent.com/66686353/117555658-5a67cb00-b061-11eb-865e-0dd7761ff77c.png)
+![3-a](https://user-images.githubusercontent.com/66686353/117555660-5a67cb00-b061-11eb-97a0-eb1535e157f0.png)
+![3](https://user-images.githubusercontent.com/66686353/117555657-59cf3480-b061-11eb-985c-fe187edb162c.png)
+
 ## Installation:
 ### Windows: 
 1. Install python
@@ -35,14 +44,6 @@ source gimpenv/bin/activate
 python3 -m pip install requests
 deactivate
 ```
- 
-
-## Usage:
-1. Filters → RemoveBackground → removeBackground
-2. Enter your key in the key dialog. You get a API key for free at https://www.remove.bg/api
-![Screenshot (111)](https://user-images.githubusercontent.com/66686353/84802853-773a8080-b001-11ea-9c1a-5da90977a010.png)
-![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
-
 ## Notes:
 - In Gimp 2.99 new plugins do not get queried if they are not placed inside a subfolder. 
 
