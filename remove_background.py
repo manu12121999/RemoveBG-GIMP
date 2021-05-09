@@ -83,9 +83,10 @@ class RemoveBG(Gimp.PlugIn):
                 dialog.destroy()
                 config.end_run(Gimp.PDBStatusType.CANCEL)
                 return procedure.new_return_values(Gimp.PDBStatusType.CANCEL, GLib.Error())
-        key = args.index(0)
+   
+        key = config.get_property('key')
+        Gimp.context_push()
         
-        #Gimp.context_push()
         image.undo_group_start()
 
         #input
