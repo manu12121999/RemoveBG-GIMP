@@ -12,7 +12,7 @@ sys.path.extend([baseLoc+'gimpenv/lib/python3.6', baseLoc+'gimpenv/lib/python3.6
 sys.path.extend([baseLoc+'gimpenv/lib/python3.7', baseLoc+'gimpenv/lib/python3.7/site-packages', baseLoc+'gimpenv/lib/python3.7/site-packages/setuptools'])
 sys.path.extend([baseLoc+'gimpenv/lib/python3.8', baseLoc+'gimpenv/lib/python3.8/site-packages', baseLoc+'gimpenv/lib/python3.8/site-packages/setuptools'])
 sys.path.extend([baseLoc+'gimpenv/lib/python3.9', baseLoc+'gimpenv/lib/python3.9/site-packages', baseLoc+'gimpenv/lib/python3.9/site-packages/setuptools'])
-
+sys.path.extend([baseLoc+'gimpenv/Lib', baseLoc+'gimpenv/Lib/site-packages', baseLoc+'gimpenv/Lib/site-packages/setuptools'])
 import requests
 
 
