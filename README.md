@@ -19,7 +19,10 @@ This plugin automatically removes the image background using https://www.remove.
 
 2. Install requests for GIMPs python (in a command prompt, as an admin) with
 
-```"C:\Program Files\GIMP 2\bin\python.exe" -m pip install requests```
+```
+"C:\Program Files\GIMP 2\bin\python.exe" -m ensurepip
+"C:\Program Files\GIMP 2\bin\python.exe" -m pip install requests
+```
 
 3. restart GIMP
 
