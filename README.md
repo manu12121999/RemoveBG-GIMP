@@ -28,7 +28,7 @@ This plugin automatically removes the image background using https://www.remove.
 2. Type the following commands in a command prompt run as an admin:
 
 ```
-cd 'C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins\' 
+cd "C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins\" 
 python -m venv gimpenv
 gimpenv\Scripts\activate.bat
 python -m pip install requests
