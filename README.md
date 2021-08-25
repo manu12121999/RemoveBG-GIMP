@@ -55,7 +55,7 @@ deactivate
 ```
 chmod +x remove_background.py
 python -m venv gimpenv
-source gimpenv/Scripts/activate
+source gimpenv/bin/activate
 python -m pip install requests
 deactivate
 ```
