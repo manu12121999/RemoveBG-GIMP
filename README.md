@@ -54,9 +54,9 @@ deactivate
 4. Install requests:
 ```
 chmod +x remove_background.py
-python -m venv gimpenv
+python3 -m venv gimpenv
 source gimpenv/bin/activate
-python -m pip install requests
+python3 -m pip install requests
 deactivate
 ```
  
