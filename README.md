@@ -47,6 +47,8 @@ deactivate
 
  ~/.gimp-2.10/plug-ins/
 
+ ~/.config/GIMP/2.10/plug-ins
+
  or /usr/lib/gimp/2.0/plug-ins  
 
 3. Put the remove_background.py in this directory and make it executable with `chmod +x remove_background.py` 
@@ -54,11 +56,12 @@ deactivate
 4. Install requests:
 ```
 chmod +x remove_background.py
-python -m venv gimpenv
-source gimpenv/Scripts/activate
-python -m pip install requests
+python3 -m venv gimpenv
+source gimpenv/bin/activate
+python3 -m pip install requests
 deactivate
 ```
+5. Make sure you have installed python support for gimp. (`gimp-python` package for ubuntu or `python2-gimp` from the AUR)
  
 
 ## Problems:
