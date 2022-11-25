@@ -3,12 +3,14 @@ This plugin automatically removes the image background using https://www.remove.
 
 
 ## Usage
-1. Install the Plugin as shown in the installation section
-2. Filters -> removebackground
+1. Install the plugin as shown in the installation section
+2. Filters → removebackground
 3. Insert your RemoveBG API Key, which you can get from https://www.remove.bg/api
-![Screenshot (111)](https://user-images.githubusercontent.com/66686353/84802853-773a8080-b001-11ea-9c1a-5da90977a010.png)
-![Screenshot (112)](https://user-images.githubusercontent.com/66686353/84803152-e1532580-b001-11ea-9bf5-ff2061c3f061.png)
-![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
+![1](https://user-images.githubusercontent.com/66686353/117555656-59369e00-b061-11eb-870e-1223874372ed.png)
+
+![2](https://user-images.githubusercontent.com/66686353/204058389-d9adfa03-b35f-4685-a025-5570b4412210.png)
+
+![3](https://user-images.githubusercontent.com/66686353/117555657-59cf3480-b061-11eb-985c-fe187edb162c.png)
 
 
 ## Installation
@@ -34,7 +36,7 @@ This plugin automatically removes the image background using https://www.remove.
  
 
 ## Problems:
-* If encourerning any problems, try out the gimp2.0/requests branch, which uses much libraries, altough it takes extra steps to install.
+* If encountering any problems, try out the gimp2.0/requests branch, which uses more advanced libraries, although it takes extra steps to install.
 
 ## Notes:
 * The plugin uploads the image to the website remove.bg. Don't use it for anything confidential!
