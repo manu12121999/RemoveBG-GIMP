@@ -1,57 +1,10 @@
 #!/usr/bin/env python
-import os
-import sys
 import tempfile
 from sys import platform
+import urllib2
+import ssl
 
-import requests
 from gimpfu import *
-
-baseLoc = os.path.dirname(os.path.realpath(__file__)) + "/"
-
-
-sys.path.extend(
-    [
-        baseLoc + "gimpenv/lib/python2.7",
-        baseLoc + "gimpenv/lib/python2.7/site-packages",
-        baseLoc + "gimpenv/lib/python2.7/site-packages/setuptools",
-    ]
-)
-sys.path.extend(
-    [
-        baseLoc + "gimpenv/lib/python3.6",
-        baseLoc + "gimpenv/lib/python3.6/site-packages",
-        baseLoc + "gimpenv/lib/python3.6/site-packages/setuptools",
-    ]
-)
-sys.path.extend(
-    [
-        baseLoc + "gimpenv/lib/python3.7",
-        baseLoc + "gimpenv/lib/python3.7/site-packages",
-        baseLoc + "gimpenv/lib/python3.7/site-packages/setuptools",
-    ]
-)
-sys.path.extend(
-    [
-        baseLoc + "gimpenv/lib/python3.8",
-        baseLoc + "gimpenv/lib/python3.8/site-packages",
-        baseLoc + "gimpenv/lib/python3.8/site-packages/setuptools",
-    ]
-)
-sys.path.extend(
-    [
-        baseLoc + "gimpenv/lib/python3.9",
-        baseLoc + "gimpenv/lib/python3.9/site-packages",
-        baseLoc + "gimpenv/lib/python3.9/site-packages/setuptools",
-    ]
-)
-sys.path.extend(
-    [
-        baseLoc + "gimpenv/Lib",
-        baseLoc + "gimpenv/Lib/site-packages",
-        baseLoc + "gimpenv/Lib/site-packages/setuptools",
-    ]
-)
 
 
 def remove_background(image, layer, key):
@@ -93,33 +46,48 @@ def remove_background(image, layer, key):
     pdb.gimp_image_remove_layer(image, layer_copy)
 
     # remove.bg
-    response = requests.post(
-        "https://api.remove.bg/v1.0/removebg",
-        files={"image_file": open(f, "rb")},
-        data={"size": "auto"},
-        # HARD CODE YOUR KEY HERE e.g: {'X-Api-Key' ="asdfjas"},
-        headers={"X-Api-Key": key},
-    )
-    if response.status_code == requests.codes.ok:
-        with open(f2, "wb") as out:
-            out.write(response.content)
-        # output
-        outlayer = pdb.gimp_file_load_layer(image, f2)
-        # because you cant scale without adding the layer
-        pdb.gimp_image_insert_layer(image, outlayer, None, 0)
+    url = "https://api.remove.bg/v1.0/removebg"
+    headers = {"X-Api-Key": key}
 
-        pdb.gimp_layer_scale(outlayer, width, height, 0)
-        # pdb.gimp_layer_resize(outlayer, width, height, 0, 0)
+    boundary = "jsdjfhsaasdfadflfhahfhj"
+    part_boundary = '--' + boundary
 
-        mask = pdb.gimp_layer_create_mask(outlayer, 2)
-        pdb.gimp_layer_add_mask(layer, mask)
-        pdb.gimp_image_remove_layer(image, outlayer)
+    # Add the files to upload
+    image_content = open(f,"rb").read()
 
-        pdb.gimp_image_undo_group_end(image)
+    part_list = []
+    part_list.append(part_boundary)
+    part_list.append('Content-Disposition: form-data; name="image_file"; filename="a.png"')
+    part_list.append('Content-Type: image/png')
+    part_list.append('')
+    part_list.append(image_content)
+    part_list.append('--' + boundary + '--')
+    part_list.append('')
+    
+    body = '\r\n'.join(part_list)
 
-    else:
-        pdb.gimp_image_undo_group_end(image)
-        print("Error:", response.status_code, response.text)
+    req = urllib2.Request(url, body, headers)
+    req.add_header('Content-Type', 'multipart/form-data; boundary=%s' % boundary)
+    req.add_header('Content-length', len(body))
+
+    context = ssl._create_unverified_context()
+    response = urllib2.urlopen(req, context = context).read()
+    with open(f2, "wb") as out:
+        out.write(response)
+
+    # output
+    outlayer = pdb.gimp_file_load_layer(image, f2)
+    # because you cant scale without adding the layer
+    pdb.gimp_image_insert_layer(image, outlayer, None, 0)
+
+    pdb.gimp_layer_scale(outlayer, width, height, 0)
+    # pdb.gimp_layer_resize(outlayer, width, height, 0, 0)
+
+    mask = pdb.gimp_layer_create_mask(outlayer, 2)
+    pdb.gimp_layer_add_mask(layer, mask)
+    pdb.gimp_image_remove_layer(image, outlayer)
+
+    pdb.gimp_image_undo_group_end(image)
 
 
 register(
