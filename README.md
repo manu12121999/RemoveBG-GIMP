@@ -17,33 +17,10 @@ This plugin automatically removes the image background using https://www.remove.
 
 * C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins
 
-2. Install _requests_ for GIMP's python (in a command prompt, as an admin) with:
-
-```
-cd "C:\Program Files\GIMP 2\bin\"
-curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
-python.exe get-pip.py
-python.exe -m pip install requests
-```
-
-3. restart GIMP
-
-#### if the plugin does not show up, proceed with the following:
-1. Install python
-2. Type the following commands in a command prompt, run as an admin:
-
-```
-cd "C:\Program Files\GIMP 2\lib\gimp\2.0\plug-ins\" 
-python -m venv gimpenv
-gimpenv\Scripts\activate.bat
-python -m pip install requests
-deactivate
- ```
+2. restart GIMP
  
 ### Linux: 
-1. Install python
-
-2. Search your plugins directory. The directory might be at:
+1. Search your plugins directory. The directory might be at:
 
  ~/.gimp-2.10/plug-ins/
 
@@ -53,20 +30,11 @@ deactivate
 
 3. Put _remove_background.py_ in this directory and make it executable with `chmod +x remove_background.py` 
 
-4. Install _requests_:
-```
-chmod +x remove_background.py
-python3 -m venv gimpenv
-source gimpenv/bin/activate
-python3 -m pip install requests
-deactivate
-```
-5. Make sure you have installed python support for gimp. (`gimp-python` package for ubuntu or `python2-gimp` from the AUR)
+4. Make sure you have installed python support for gimp. (`gimp-python` package for ubuntu or `python2-gimp` from the AUR)
  
 
 ## Problems:
-* if removebackground does not show up in the GIMP menu, it's because _requests_ is not found. 
-If _requests_ is installed correctly, let me know about it in the Issues section.
+* If encourerning any problems, try out the gimp2.0/requests branch, which uses much libraries, altough it takes extra steps to install.
 
 ## Notes:
 * The plugin uploads the image to the website remove.bg. Don't use it for anything confidential!
