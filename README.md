@@ -1,14 +1,13 @@
 # RemoveBG-GIMP
 This plugin automatically removes the image background using https://www.remove.bg/. The website uses neuronal networks to distinguish the foreground from the background. After that, a layer mask is applied to the image, which can be edited to improve the cut-out, if needed. 
 
+## This branch uses the python package ```requests``` which has to be installed seperately.
 
 ## Usage
 1. Install the Plugin as shown in the installation section
 2. Filters -> removebackground
 3. Insert your RemoveBG API Key, which you can get from https://www.remove.bg/api
-![Screenshot (111)](https://user-images.githubusercontent.com/66686353/84802853-773a8080-b001-11ea-9c1a-5da90977a010.png)
-![Screenshot (112)](https://user-images.githubusercontent.com/66686353/84803152-e1532580-b001-11ea-9bf5-ff2061c3f061.png)
-![Screenshot (113)](https://user-images.githubusercontent.com/66686353/84802857-786bad80-b001-11ea-9bdd-be2c37bbea8d.png)
+![1](https://user-images.githubusercontent.com/66686353/117555656-59369e00-b061-11eb-870e-1223874372ed.png)
 
 
 ## Installation
