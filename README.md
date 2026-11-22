@@ -1,21 +1,24 @@
 # RemoveBG-GIMP
-A small plugin to easily remove the background of an image using https://www.remove.bg/
+A small plugin to easily remove the background of an image using REST endpoints (such as  `remove.bg`, `bgclear.ai`, `cutmatte.com`, or a custom endpoint)
 
+Note that `remove.bg` is shutting down its standalone API on December 1, 2026). Replace it with another endpoint (new API key required) or use the fully local [background removal plugin](https://github.com/manu12121999/GIMP-Background-Remover)
 
 ## Installation:
-1. Use `remove_bg_gimp2.py` if you have GIMP up to 2.10 and `remove_bg_gimp3.py` for GIMP 3.0 or higher.
+1. Locate GIMP's plugin directory. 
+    common paths include `~/.config/GIMP/3.2/plug-ins`, `C:\Program Files\GIMP 3\lib\gimp\3.2\plug-ins\` or `C:\Users\<USERNAME>\AppData\Roaming\GIMP\3.2\plug-ins\` 
+    If you cant find it, go inside GIMP to `Edit->Preferences->Folders->Plugins`
 
-2. Put the python file inside GIMP's plugin-directory. It is important, that the `.py` file is placed inside a folder with the same name as the file (except the `.py` ending). E.g. `...\gimp\3.0\plug-ins\remove_bg_gimp3\remove_bg_gimp3.py`
+2. Put the python file inside GIMP's plugin-directory. It is important, that the `.py` file is placed inside a folder with the same name as the file (except the `.py` ending). E.g. `...\gimp\3.0\plug-ins\remove_bg\remove_bg.py`
 
-    The pugin directory can be e.g. at `C:\Program Files\GIMP 3\lib\gimp\3.0\plug-ins\` or `C:\Users\<USERNAME>\AppData\Roaming\GIMP\3.0\plug-ins\` If you cant find it, go inside GIMP to `Edit->Preferences->Folders->Plugins`
+3. On Linux, make the file executable (`chmod +x remove_bg.py`)
 
-3. On Linux, make the file executable (`chmod +x remove_bg_gimp3.py`) and make sure you have installed python support for gimp. (`gimp-python` package for ubuntu or `python2-gimp` from the AUR)
+4. Restart GIMP
 
 
 ## Usage
 1. Install the plugin as shown above
-2. Filters → RemoveBackground → Remove Background
-3. Enter your key in the key dialog. You get a API key for free at https://www.remove.bg/api
+2. Filters → Remove_BG → Remove Background
+3. Choose the url and enter your key in the key dialog. You get a API key for free at the respected websites
 4. Press `Save Settings` to save the key for next uses
 ![1](https://user-images.githubusercontent.com/66686353/117555656-59369e00-b061-11eb-870e-1223874372ed.png)
 ![2](https://user-images.githubusercontent.com/66686353/204058389-d9adfa03-b35f-4685-a025-5570b4412210.png)
@@ -23,10 +26,10 @@ A small plugin to easily remove the background of an image using https://www.rem
 
 
 ## Notes:
-* The plugin uploads the image to the website remove.bg. Don't use it for anything confidential!
-* If encountering any problems, try out the gimp2.0/requests branch, which uses more advanced libraries, although it takes extra steps to install.
+* The plugin uploads the image to be processed by the website. Don't use it for anything confidential!
 
 ## Licence:
-It is **not** an official remove.bg plugin, so keep their Terms of Service in mind (https://www.remove.bg/tos)
+Please follow the Terms of Service of whichever API endpoint you use.
 
 Besides that, you can do whatever you want with my code!
+
